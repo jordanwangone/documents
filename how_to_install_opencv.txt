@@ -1,0 +1,25 @@
+1. C++11 is not supported
+cmake时添加参数:
+-D ENABLE_CXX11=ON \
+-D CMAKE_C_COMPILER=/usr/bin/gcc-5 \
+2. can't find reconstruct function
+在
+#include<opencv2/sfm.hpp>
+之前添加
+#define CERES_FOUND true
+
+find_package(Ceres QUIET)
+
+3. 没有找到eigen3
+先安装libeigen3-dev,之后cmake时传参-DEIGEN_INCLUDE_PATH=/usr/include/eigen3/
+
+4. 找不到vtk
+安装libvtk5-dev,之后cmake时传参-DWITH_VTK=ON
+
+5. opencv3.4完整编译命令
+cmake -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON  -D BUILD_EXAMPLES=ON  -D WITH_OPENGL=ON -D WITH_VTK=ON .. -DCMAKE_BUILD_TYPE=RELEASE -D ENABLE_CXX11=ON  -DEIGEN_INCLUDE_PATH=/usr/include/eigen3/ -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules ..
+make -j16
+sudo make install
+ 
+6. 安装ceres-solver
+下载代码,编译,make install
